@@ -59,3 +59,20 @@ console.log("\n");
   // doubled = undefined
 })();
 
+// compare two objects
+(function() {
+  const obj1 = {
+    value: 1
+  }
+  
+  const obj2 = {
+    value: 1
+  }
+  
+  console.log("obj1 == obj2", obj1 == obj2);
+  console.log("obj1 === obj2", obj1 === obj2);
+  console.log('6 * "2" =', 6 * '2');
+  console.log('6 + "2" =', 6 + '2');
+})();
+
+// 
