@@ -53,3 +53,20 @@ foo( 2 );
   if the program is not running in 'Strict Mode', then the global scope will create a variable of that name
   in the global scope, and hand it back to the engine.
 */
+
+
+/*
+function foo() {
+  var a = 2;
+
+  function bar() {
+    console.log( a ); // 2
+  }
+
+  bar();
+}
+
+foo();
+
+console.log();
+*/
