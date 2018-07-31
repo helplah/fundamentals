@@ -1,4 +1,5 @@
-/* chp 1
+// chp 1
+/*
 function foo(num) {
   console.log( "foo: " + num );
   // keep track of how many times `foo` is called
@@ -84,10 +85,12 @@ var obj = {
   a: 2
 }
 
-foo.call(obj); 
+foo.call(obj); // 2
 */
 
 
+// Hard binding (under explicit binding)
+/*
 function foo() {
   console.log(this.a);
 }
@@ -102,3 +105,87 @@ var bar = function() {
 
 bar(); // 2
 setTimeout(bar, 100); // 2 
+
+// hard-bound `bar` can no longer have its `this` overriden
+bar.call(window); // 2
+*/
+
+
+// wrap a function with a hard binding creates a pass-through of any arguments passed and any return value received:
+/*
+function foo(something) {
+  console.log( this.a, something );
+  return this.a + something;
+}
+
+var obj = {
+  a: 2
+};
+
+var bar = function() {
+  return foo.apply( obj, arguments );
+};
+
+var b = bar( 3 ); // 2 3
+console.log( b ); // 5
+*/
+
+
+// reusuable helper
+/*
+function foo(something) {
+  console.log( this.a, something );
+  return this.a + something;
+}
+  
+// simple `bind` helper
+function bind(fn, obj) {
+  return function() {
+    return fn.apply( obj, arguments );
+  };
+}
+
+var obj = {
+  a: 2
+};
+
+var bar = bind( foo, obj );
+var b = bar( 3 ); // 2 3
+console.log( b ); // 5
+*/
+
+
+// bind(..) returns a new function that is hardcoded to call the original function with the this context set as you specified.
+/*
+function foo(something) {
+  console.log( this.a, something );
+  return this.a + something;
+}
+  
+var obj = {
+  a: 2
+};
+
+var bar = foo.bind( obj );
+var b = bar( 3 ); // 2 3
+console.log( b ); // 5
+*/
+
+
+// API call context
+/*
+function foo(el) {
+  console.log(el, this.id);
+}
+
+var obj = {
+  id: "awesome"
+};
+
+// use `obj` as `this` for `foo(...)` calls
+[1, 2, 3].forEach(foo, obj);
+// 1 awesome  2 awesome  3 awesome
+*/
+
+
+// new Binding
